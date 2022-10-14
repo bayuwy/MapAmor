@@ -7,14 +7,34 @@
 
 import UIKit
 
+@IBDesignable
 class PrimaryButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    @IBInspectable var cornerRadius: CGFloat = 10 {
+        didSet { update() }
     }
-    */
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        update()
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        update()
+    }
+    
+    func update() {
+        layer.cornerRadius = cornerRadius
+        layer.masksToBounds = true
+        
+        titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        backgroundColor = UIColor(
+            named: "AccentColor",
+            in: Bundle(for: self.classForCoder),
+            compatibleWith: nil
+        )
+        tintColor = UIColor.white
+        
+        contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+    }
 }

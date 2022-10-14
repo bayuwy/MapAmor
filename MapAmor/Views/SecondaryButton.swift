@@ -7,14 +7,15 @@
 
 import UIKit
 
-class SecondaryButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+@IBDesignable
+class SecondaryButton: PrimaryButton {
+    override func update() {
+        super.update()
+        backgroundColor = UIColor.secondarySystemFill
+        tintColor = UIColor(
+            named: "AccentColor",
+            in: Bundle(for: self.classForCoder),
+            compatibleWith: nil
+        )
     }
-    */
-
 }
