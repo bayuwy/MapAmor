@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A16A3BF28FDD6340049CE8A /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A16A3BE28FDD6330049CE8A /* PlaceViewController.swift */; };
+		3A16A3C228FDDAEF0049CE8A /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A16A3C128FDDAEF0049CE8A /* UIViewControllerExtensions.swift */; };
+		3A16A3C428FDDE670049CE8A /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A16A3C328FDDE670049CE8A /* PlaceViewModel.swift */; };
 		3A2DAD9728F9928F009DBB3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2DAD9628F9928F009DBB3B /* AppDelegate.swift */; };
 		3A2DAD9928F9928F009DBB3B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2DAD9828F9928F009DBB3B /* SceneDelegate.swift */; };
 		3A2DAD9B28F9928F009DBB3B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2DAD9A28F9928F009DBB3B /* MapViewController.swift */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A16A3BE28FDD6330049CE8A /* PlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewController.swift; sourceTree = "<group>"; };
+		3A16A3C128FDDAEF0049CE8A /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		3A16A3C328FDDE670049CE8A /* PlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewModel.swift; sourceTree = "<group>"; };
 		3A2DAD9328F9928F009DBB3B /* MapAmor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapAmor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2DAD9628F9928F009DBB3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A2DAD9828F9928F009DBB3B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +55,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A16A3BD28FDD60A0049CE8A /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				3A16A3BE28FDD6330049CE8A /* PlaceViewController.swift */,
+				3A16A3C328FDDE670049CE8A /* PlaceViewModel.swift */,
+			);
+			path = Place;
+			sourceTree = "<group>";
+		};
+		3A16A3C028FDDAB90049CE8A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3A16A3C128FDDAEF0049CE8A /* UIViewControllerExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		3A2DAD8A28F9928F009DBB3B = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +93,7 @@
 			children = (
 				3A2DAD9628F9928F009DBB3B /* AppDelegate.swift */,
 				3A2DAD9828F9928F009DBB3B /* SceneDelegate.swift */,
+				3A16A3C028FDDAB90049CE8A /* Extensions */,
 				3A2DADB328F9A60E009DBB3B /* Views */,
 				3A2DADAC28F994DB009DBB3B /* Models */,
 				3A2DADAA28F9944F009DBB3B /* Modules */,
@@ -85,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				3A2DADAB28F99458009DBB3B /* Map */,
+				3A16A3BD28FDD60A0049CE8A /* Place */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -191,7 +216,10 @@
 			files = (
 				3A2DADB528F9A62A009DBB3B /* PrimaryButton.swift in Sources */,
 				3A2DAD9B28F9928F009DBB3B /* MapViewController.swift in Sources */,
+				3A16A3C228FDDAEF0049CE8A /* UIViewControllerExtensions.swift in Sources */,
+				3A16A3C428FDDE670049CE8A /* PlaceViewModel.swift in Sources */,
 				3A2DAD9728F9928F009DBB3B /* AppDelegate.swift in Sources */,
+				3A16A3BF28FDD6340049CE8A /* PlaceViewController.swift in Sources */,
 				3A2DADB728F9A90D009DBB3B /* SecondaryButton.swift in Sources */,
 				3A2DADB228F99665009DBB3B /* MapViewModel.swift in Sources */,
 				3A2DAD9928F9928F009DBB3B /* SceneDelegate.swift in Sources */,

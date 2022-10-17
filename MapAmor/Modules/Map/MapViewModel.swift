@@ -55,4 +55,8 @@ class MapViewModel {
             return UIImage(systemName: "photo")!
         }
     }
+    
+    func place(at index: Int) -> Place {
+        return places[index]
+    }
 }

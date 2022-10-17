@@ -107,3 +107,10 @@ extension MapViewController: UICollectionViewDelegateFlowLayout {
         return .zero
     }
 }
+
+// MARK: - UICollectionViewDelegate
+extension MapViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presentPlaceViewController(viewModel.place(at: indexPath.item))
+    }
+}

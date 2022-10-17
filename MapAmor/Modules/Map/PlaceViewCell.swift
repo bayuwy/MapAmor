@@ -13,5 +13,5 @@ class PlaceViewCell: UICollectionViewCell {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var learnButton: PrimaryButton!
     @IBOutlet weak var nextButton: SecondaryButton!
-    
+
 }
