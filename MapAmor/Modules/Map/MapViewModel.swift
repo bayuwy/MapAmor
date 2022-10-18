@@ -34,6 +34,17 @@ class MapViewModel {
         return places
     }
     
+    func annotation(at index: Int) -> MKAnnotation {
+        return places[index]
+    }
+    
+    func index(of annotation: MKAnnotation) -> Int? {
+        if let place = annotation as? Place {
+            return places.firstIndex(of: place)
+        }
+        return nil
+    }
+    
     var numberOfPlaces: Int {
         return places.count
     }
@@ -54,5 +65,9 @@ class MapViewModel {
         else {
             return UIImage(systemName: "photo")!
         }
+    }
+    
+    func place(at index: Int) -> Place {
+        return places[index]
     }
 }

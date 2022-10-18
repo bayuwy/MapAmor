@@ -1,14 +1,14 @@
 //
-//  PrimaryButton.swift
+//  GradientView.swift
 //  MapAmor
 //
-//  Created by Bayu Yasaputro on 14/10/22.
+//  Created by Bayu Yasaputro on 18/10/22.
 //
 
 import UIKit
 
 @IBDesignable
-class PrimaryButton: UIButton {
+class GradientView: UIView {
     @IBInspectable var cornerRadius: CGFloat = 10 {
         didSet { update() }
     }
@@ -52,15 +52,5 @@ class PrimaryButton: UIButton {
     func update() {
         layer.cornerRadius = cornerRadius
         layer.masksToBounds = true
-        
-        titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-//        backgroundColor = UIColor(
-//            named: "AccentColor",
-//            in: Bundle(for: self.classForCoder),
-//            compatibleWith: nil
-//        )
-        tintColor = UIColor.white
-        
-        contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
     }
 }
