@@ -41,6 +41,7 @@ class PlaceViewController: UIViewController {
         descriptionLabel.text = viewModel.placeDescription
         
         mapView.isScrollEnabled = false
+        mapView.delegate = self
         reloadMapView()
     }
     
@@ -100,6 +101,76 @@ extension PlaceViewController: UICollectionViewDelegateFlowLayout {
         let width = UIScreen.main.bounds.width
         return CGSize(width: width, height: width)
     }
+}
+
+// MARK: - MKMapViewDelegate
+extension PlaceViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
+        routeToPlace()
+    }
+    
+    func routeToPlace() {
+        let actionSheet = UIAlertController(title: "Directions using", message: nil, preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Maps", style: .default, handler: { (_) in
+            self.openMaps()
+        }))
+        
+        if canOpen(urlScheme: "comgooglemaps") {
+            actionSheet.addAction(UIAlertAction(title: "Google Maps", style: .default, handler: { (_) in
+                self.openGoogleMaps()
+            }))
+        }
+        
+        if canOpen(urlScheme: "waze") {
+            actionSheet.addAction(UIAlertAction(title: "Waze", style: .default, handler: { (_) in
+                self.openWaze()
+            }))
+        }
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(actionSheet, animated: true)
+    }
+    
+    func openMaps() {
+        let coordinate = viewModel.annotation.coordinate
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
+        mapItem.name = viewModel.placeName
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+    }
+    
+    func canOpen(urlScheme: String) -> Bool {
+        var components = URLComponents()
+        components.scheme = urlScheme
+        if let url = components.url {
+            return UIApplication.shared.canOpenURL(url)
+        }
+        return false
+    }
+    
+    func openGoogleMaps() {
+        let coordinate = viewModel.annotation.coordinate
+        let latString = String(format: "%.6f", coordinate.latitude)
+        let lngString = String(format: "%.6f", coordinate.longitude)
+        let url = URL(string: "comgooglemaps://?saddr=&daddr=\(latString),\(lngString)&directionsmode=driving")!
+        let application = UIApplication.shared
+        if application.canOpenURL(url) {
+            application.open(url)
+        }
+    }
+    
+    func openWaze() {
+        let coordinate = viewModel.annotation.coordinate
+        let latString = String(format: "%.6f", coordinate.latitude)
+        let lngString = String(format: "%.6f", coordinate.longitude)
+        let url = URL(string: "waze://?ll=\(latString),\(lngString)&navigate=yes")!
+        let application = UIApplication.shared
+        if application.canOpenURL(url) {
+            application.open(url)
+        }
+    }
+    
 }
 
 extension UIViewController {

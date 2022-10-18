@@ -66,6 +66,17 @@ class MapViewController: UIViewController {
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
         zoom(to: annotation)
+        goToIndex(with: annotation)
+    }
+    
+    func goToIndex(with annotation: MKAnnotation) {
+        if let index = viewModel.index(of: annotation) {
+            collectionView.scrollToItem(
+                at: IndexPath(item: index, section: 0),
+                at: .centeredHorizontally,
+                animated: true
+            )
+        }
     }
 }
 
@@ -82,6 +93,8 @@ extension MapViewController: UICollectionViewDataSource {
         cell.imageView.image = viewModel.placeImage(at: index)
         cell.titleLabel.text = viewModel.placeName(at: index)
         cell.subtitleLabel.text = viewModel.placeCityName(at: index)
+        
+        cell.delegate = self
         
         return cell
     }
@@ -111,6 +124,50 @@ extension MapViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - UICollectionViewDelegate
 extension MapViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presentPlaceViewController(viewModel.place(at: indexPath.item))
+//        presentPlaceViewController(viewModel.place(at: indexPath.item))
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let page = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        goToAnnotation(at: page)
+    }
+}
+
+// MARK: - PlaceViewCellDelegate
+extension MapViewController: PlaceViewCellDelegate {
+    func placeViewCellLearnButtonTapped(_ cell: PlaceViewCell) {
+        if let indexPath = collectionView.indexPath(for: cell) {
+            presentPlaceViewController(viewModel.place(at: indexPath.item))
+        }
+    }
+    
+    func placeViewCellNextButtonTapped(_ cell: PlaceViewCell) {
+        if let indexPath = collectionView.indexPath(for: cell) {
+            next(from: indexPath.item)
+        }
+    }
+    
+    func next(from index: Int) {
+        var nextIndex = index + 1
+        if nextIndex == viewModel.numberOfPlaces {
+            nextIndex = 0
+        }
+        collectionView.scrollToItem(
+            at: IndexPath(item: nextIndex, section: 0),
+            at: .centeredHorizontally,
+            animated: true
+        )
+        goToAnnotation(at: nextIndex)
+    }
+    
+    func goToAnnotation(at index: Int) {
+        let annotation = viewModel.annotation(at: index)
+        let coordinateRegion = MKCoordinateRegion(
+            center: annotation.coordinate,
+            latitudinalMeters: 2000,
+            longitudinalMeters: 2000
+        )
+        mapView.setRegion(coordinateRegion, animated: true)
+        mapView.selectAnnotation(annotation, animated: true)
     }
 }
